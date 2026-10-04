@@ -26,7 +26,7 @@ code editors, browsers, or PDFs, without leaving it.
 ```powershell
 python -m pip install -r requirements.txt
 python main.py
-
+```
 ## Helper scripts (`.bat` and `.ps1`)
 
 This repository includes Windows helper scripts to make common tasks easier.
