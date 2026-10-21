@@ -17,7 +17,6 @@ code editors, browsers, or PDFs, without leaving it.
 
 <p align="center">
   <img src="toolbar.jpeg" alt="Transparent Whiteboard horizontal toolbar" width="720">
-  <img src="toolbar-v.jpeg" alt="Transparent Whiteboard vertical toolbar" width="220">
 </p>
 
 ## Platform support
