@@ -13,6 +13,13 @@ PowerPoint offers inking, but it is restricted to the app itself. This tool work
 transparent layer over your whole desktop, so you can annotate any window, such as slides,
 code editors, browsers, or PDFs, without leaving it.
 
+## Toolbar screenshots
+
+<p align="center">
+  <img src="toolbar.jpeg" alt="Transparent Whiteboard horizontal toolbar" width="720">
+  <img src="toolbar-v.jpeg" alt="Transparent Whiteboard vertical toolbar" width="220">
+</p>
+
 ## Platform support
 
 | Platform | How to run |
