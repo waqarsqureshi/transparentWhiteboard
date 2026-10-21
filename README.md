@@ -17,20 +17,27 @@ code editors, browsers, or PDFs, without leaving it.
 
 | Platform | How to run |
 |----------|------------|
-| Windows 10 / 11 | Download the ready-made release from GitHub Releases, or run from source |
-| Linux | Run from source |
-| macOS | Run from source |
+| Windows 10 / 11 | Supported: download a release or run from source |
+| Linux / macOS | Not officially supported or tested |
 
 ## Run from source
+
+On Windows, install the dependencies and start the application:
 
 ```powershell
 python -m pip install -r requirements.txt
 python main.py
 ```
 
+PySide6 is cross-platform, but this application also uses Windows APIs for features
+such as global shortcuts and window/display behavior. Those calls are guarded so they
+are not made on other platforms, but Linux and macOS behavior has not been validated
+and may differ.
+
 ## Helper scripts (`.bat` and `.ps1`)
 
-This repository includes Windows helper scripts to make common tasks easier.
+This repository includes Windows helper scripts to install dependencies and build the
+application.
 
 ### What the scripts do
 
@@ -40,12 +47,6 @@ This repository includes Windows helper scripts to make common tasks easier.
 - **`.ps1` (PowerShell script)**  
   A PowerShell script with richer scripting support. Use this in PowerShell (`pwsh` / Windows PowerShell).
 
-These scripts are typically used to:
-- set up a Python environment,
-- install dependencies,
-- run the app,
-- and/or package builds.
-
 ### Which one should I use?
 
 - Use **`.bat`** if you prefer Command Prompt or simple double-click execution.
@@ -53,66 +54,15 @@ These scripts are typically used to:
 
 ## Build
 
-### Linux / macOS
-
-Use the build helper script:
-
-```bash
-python3 build.py
-```
-
-This is the recommended way to build on Linux or macOS.
-
 ### Windows
 
-Use the provided `.bat` or `.ps1` script, or run equivalent manual build commands.
+Run `.\build.ps1` in PowerShell or `build.bat` in Command Prompt. Both scripts install
+the requirements and build with `TransparentWhiteboard.spec`. The standalone
+application is created at
+`dist\TransparentWhiteboard\TransparentWhiteboard.exe`.
 
-## Build a Windows `.exe` from Ubuntu (PyInstaller)
+### Linux / macOS
 
-> You likely meant **PyInstaller** (packaging), not **Pylance** (VS Code language server).
-
-Native Windows `.exe` files are most reliable when built on Windows.  
-If you're on Ubuntu, the recommended path is to build on a Windows GitHub Actions runner.
-
-### Recommended: GitHub Actions on Windows
-
-```yaml
-name: Build Windows EXE
-
-on:
-  workflow_dispatch:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pyinstaller
-
-      - name: Build EXE
-        run: |
-          pyinstaller --onefile --windowed main.py --name transparent-whiteboard
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: transparent-whiteboard-windows
-          path: dist/transparent-whiteboard.exe
-```
-
-### Local Ubuntu build note
-
-If you run PyInstaller directly on Ubuntu, it builds a Linux binary (not a Windows `.exe`).
+Linux and macOS builds are not supported or tested. PyInstaller packages for the
+operating system on which it runs; running it on Linux does not produce a Windows
+`.exe`. Build Windows executables on Windows, including on a Windows CI runner.
