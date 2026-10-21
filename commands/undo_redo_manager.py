@@ -52,6 +52,19 @@ class ClearCanvasCommand(Command):
     def redo(self):
         self.strokes_list.clear()
 
+class UpdateStrokesCommand(Command):
+    """Records a before/after snapshot of strokes (e.g. a continuous partial-erase rub gesture)."""
+    def __init__(self, strokes_list: List[Stroke], before_strokes: List[Stroke], after_strokes: List[Stroke]):
+        self.strokes_list = strokes_list
+        self.before_strokes = list(before_strokes)
+        self.after_strokes = list(after_strokes)
+    def execute(self):
+        self.strokes_list[:] = list(self.after_strokes)
+    def undo(self):
+        self.strokes_list[:] = list(self.before_strokes)
+    def redo(self):
+        self.strokes_list[:] = list(self.after_strokes)
+
 class UndoRedoManager:
     def __init__(self, max_history: int = 100):
         self.undo_stack: List[Command] = []

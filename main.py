@@ -64,7 +64,8 @@ def main():
             return 0
 
     window = TransparentWhiteboardWindow(screen_index=screen_index, config=config)
-    window.showMaximized()
+    window.show()
+    window.apply_fullscreen_geometry()
 
     return app.exec()
 

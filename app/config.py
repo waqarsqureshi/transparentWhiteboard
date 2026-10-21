@@ -16,6 +16,8 @@ class WhiteboardConfig:
     smoothing_factor: float = 0.5
     toolbar_position: List[int] = field(default_factory=lambda: [100, 40])
     toolbar_collapsed: bool = False
+    toolbar_vertical: bool = False
+    save_folder: str = ""  # empty => ~/Pictures/TransparentWhiteboard
     favorite_colors: List[str] = field(default_factory=lambda: [
         "#FF3B30", "#34C759", "#007AFF", "#FFCC00", "#000000", "#FFFFFF"
     ])
